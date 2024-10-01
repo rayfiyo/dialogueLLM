@@ -73,26 +73,11 @@ func main() {
 			Content: prompt,
 		})
 
-		switch *flags.Mode {
-		case "chat":
-			request := &models.ChatRequest{
-				Model:    *flags.Model,
-				Messages: messages,
-			}
-			content, err = client.Chat(request)
-		case "generate":
-			request := &models.GenerateRequest{
-				Model:  *flags.Model,
-				Prompt: prompt,
-				// Context: context,
-			}
-			content, err = client.Generate(request)
-		default:
-			log.Fatalf(
-				"Invalid flags.Mode: %s. Use 'chat' or 'generate'", *flags.Mode,
-			)
+		request := &models.ChatRequest{
+			Model:    *flags.Model,
+			Messages: messages,
 		}
-
+		content, err = client.Chat(request)
 		if err != nil {
 			log.Fatalf("Error in switch@%d: %v", i, err)
 		}

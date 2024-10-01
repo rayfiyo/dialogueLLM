@@ -28,10 +28,6 @@ func (c *Client) Chat(req *models.ChatRequest) (string, error) {
 	return c.sendRequest("/api/chat", req, "chat")
 }
 
-func (c *Client) Generate(req *models.GenerateRequest) (string, error) {
-	return c.sendRequest("/api/generate", req, "generate")
-}
-
 func (c *Client) sendRequest(endpoint string, req interface{}, mode string) (string, error) {
 	data, err := json.Marshal(req)
 	if err != nil {
@@ -61,38 +57,19 @@ func (c *Client) sendRequest(endpoint string, req interface{}, mode string) (str
 	var content strings.Builder
 	scanner := bufio.NewScanner(resp.Body)
 	for scanner.Scan() {
-		switch mode {
-
-		case "chat":
-			var response models.ChatResponse
-			if err := json.Unmarshal(
-				scanner.Bytes(), &response,
-			); err != nil {
-				return "", fmt.Errorf(
-					"Error unmarshaling chat response: %v", err)
-			}
-
-			// 逐次標準出力
-			fmt.Print(response.Message.Content)
-
-			// 変数への書き込み
-			content.WriteString(response.Message.Content)
-
-		case "generate":
-			var response models.GenerateResponse
-			if err := json.Unmarshal(
-				scanner.Bytes(), &response,
-			); err != nil {
-				return "", fmt.Errorf(
-					"Error unmarshaling chat response: %v", err)
-			}
-
-			// 逐次標準出力
-			fmt.Print(response.Response)
-
-			// 変数への書き込み
-			content.WriteString(response.Response)
+		var response models.ChatResponse
+		if err := json.Unmarshal(
+			scanner.Bytes(), &response,
+		); err != nil {
+			return "", fmt.Errorf(
+				"Error unmarshaling chat response: %v", err)
 		}
+
+		// 逐次標準出力
+		fmt.Print(response.Message.Content)
+
+		// 変数への書き込み
+		content.WriteString(response.Message.Content)
 	}
 	fmt.Println("") // 文末調整用
 
