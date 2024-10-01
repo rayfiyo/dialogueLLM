@@ -30,39 +30,14 @@ func main() {
 	var err error
 
 	for i := 1; i < *flags.CyclesLimit+1; i++ {
+
 		// 整形
-		if i%2 != 0 {
-			// 1 odd
-			prompt = "" +
-				*flags.Head + "\n" +
-				*flags.Head1 + "\n" +
-				prompt + "\n" +
-				*flags.Tail + "\n" +
-				*flags.Tail1 + "\n"
-			if *flags.Model1 != "" {
-				flags.Model = flags.Model1
-			}
-		} else {
-			// 2 even
-			prompt = "" +
-				*flags.Head + "\n" +
-				*flags.Head2 + "\n" +
-				prompt + "\n" +
-				*flags.Tail + "\n" +
-				*flags.Tail2 + "\n"
-			if *flags.Model2 != "" {
-				flags.Model = flags.Model2
-			}
-		}
 		if *flags.Init != "" {
-			prompt = "" +
-				*flags.Head + "\n" +
-				*flags.Init + "\n" +
-				*flags.Tail + "\n"
-			i = 0
-			log.Println(*flags.Init)
+			i--
 			*flags.Init = ""
-			log.Println(*flags.Init)
+			generate.Prompt(i, prompt)
+		} else {
+			generate.Prompt(i, prompt)
 		}
 
 		fmt.Print("\n- - - - - - - - - - - -\n")
