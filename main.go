@@ -33,7 +33,7 @@ func main() {
 
 		// 整形
 		if *flags.Init != "" {
-			i--
+			i = 0
 			*flags.Init = ""
 			generate.Prompt(i, prompt)
 		} else {
@@ -52,6 +52,8 @@ func main() {
 			Model:    *flags.Model,
 			Messages: messages,
 		}
+
+		// APIの通信（リクエスト送信とレスポンス取得）
 		content, err = client.Chat(request)
 		if err != nil {
 			log.Fatalf("Error in switch@%d: %v", i, err)
@@ -59,14 +61,9 @@ func main() {
 
 		// ファイルに保存
 		if err := files.Append(fileName,
-			"## "+fmt.Sprint(i)+"\n",
+			fmt.Sprintf("## %d\n%s\n", i, content),
 		); err != nil {
-			log.Fatalf("Error appending to file 1@%d: %v", i, err)
-		}
-		if err := files.Append(fileName,
-			content+"\n",
-		); err != nil {
-			log.Fatalf("Error appending to file 2@%d: %v", i, err)
+			log.Fatalf("Error appending to file@%d: %v", i, err)
 		}
 
 		// 次のサイクルに繋げる後処理
