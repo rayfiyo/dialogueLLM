@@ -1,8 +1,8 @@
 package create
 
 import (
-	"github.com/rayfiyo/llms/dialogue/internal/constants"
-	"github.com/rayfiyo/llms/dialogue/models"
+	"github.com/rayfiyo/dialogueLLM/internal/constants"
+	"github.com/rayfiyo/dialogueLLM/models"
 )
 
 // func (models.ChatRequest, models.Message) models.ChatRequest

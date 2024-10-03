@@ -3,7 +3,7 @@ package files
 import (
 	"fmt"
 
-	"github.com/rayfiyo/llms/dialogue/internal/flags"
+	"github.com/rayfiyo/dialogueLLM/internal/flags"
 )
 
 // func (string, string) error

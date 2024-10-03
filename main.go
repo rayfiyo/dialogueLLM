@@ -4,13 +4,13 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/rayfiyo/llms/dialogue/internal/api"
-	"github.com/rayfiyo/llms/dialogue/internal/constants"
-	"github.com/rayfiyo/llms/dialogue/internal/create"
-	"github.com/rayfiyo/llms/dialogue/internal/files"
-	"github.com/rayfiyo/llms/dialogue/internal/flags"
-	"github.com/rayfiyo/llms/dialogue/internal/format"
-	"github.com/rayfiyo/llms/dialogue/models"
+	"github.com/rayfiyo/dialogueLLM/internal/api"
+	"github.com/rayfiyo/dialogueLLM/internal/constants"
+	"github.com/rayfiyo/dialogueLLM/internal/create"
+	"github.com/rayfiyo/dialogueLLM/internal/files"
+	"github.com/rayfiyo/dialogueLLM/internal/flags"
+	"github.com/rayfiyo/dialogueLLM/internal/format"
+	"github.com/rayfiyo/dialogueLLM/models"
 )
 
 func main() {

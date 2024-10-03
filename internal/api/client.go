@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/rayfiyo/llms/dialogue/models"
+	"github.com/rayfiyo/dialogueLLM/models"
 )
 
 type Client struct {

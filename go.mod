@@ -1,3 +1,3 @@
-module github.com/rayfiyo/llms/dialogue
+module github.com/rayfiyo/dialogueLLM
 
 go 1.23.0
