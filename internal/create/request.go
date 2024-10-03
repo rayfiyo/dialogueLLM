@@ -1,4 +1,4 @@
-package generate
+package create
 
 import (
 	"github.com/rayfiyo/llms/dialogue/internal/constants"

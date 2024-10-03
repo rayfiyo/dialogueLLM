@@ -6,7 +6,7 @@ import (
 	"github.com/rayfiyo/llms/dialogue/internal/flags"
 )
 
-// func (int, string) string 
+// func (int, string) string
 func Prompt(cycle int, prompt string) string {
 	if cycle%2 != 0 {
 		// 1 odd

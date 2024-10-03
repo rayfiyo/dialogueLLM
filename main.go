@@ -7,10 +7,10 @@ import (
 
 	"github.com/rayfiyo/llms/dialogue/internal/api"
 	"github.com/rayfiyo/llms/dialogue/internal/constants"
+	"github.com/rayfiyo/llms/dialogue/internal/create"
 	"github.com/rayfiyo/llms/dialogue/internal/files"
 	"github.com/rayfiyo/llms/dialogue/internal/flags"
 	"github.com/rayfiyo/llms/dialogue/internal/format"
-	"github.com/rayfiyo/llms/dialogue/internal/generate"
 	"github.com/rayfiyo/llms/dialogue/models"
 )
 
@@ -20,7 +20,7 @@ func main() {
 	prompt := flag.Arg(0)
 
 	/// ファイル生成
-	fileName := generate.File()
+	fileName := create.File()
 
 	// ログの Markdown に ヘッダー情報として書き込む
 	if err := files.Header(fileName, prompt); err != nil {
@@ -51,7 +51,7 @@ func main() {
 			Role:    constants.User,
 			Content: prompt,
 		}
-		request = generate.Request(request, message)
+		request = create.Request(request, message)
 
 		// APIの通信（リクエスト送信とレスポンス取得）
 		content, err := client.Chat(&request)
