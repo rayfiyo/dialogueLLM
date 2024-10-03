@@ -1,7 +1,6 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"log"
 
@@ -15,9 +14,8 @@ import (
 )
 
 func main() {
-	// フラグのパース
-	flags.Parse()
-	prompt := flag.Arg(0)
+	// フラグのパース と 引数の取得
+	prompt := flags.Parse()
 
 	/// ファイル生成
 	fileName := create.File()

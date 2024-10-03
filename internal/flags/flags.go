@@ -27,7 +27,10 @@ var (
 		"tail2", "", "Head of even cycle prompt. Fixed statement.")
 )
 
-// func ()
-func Parse() {
+// func () string
+func Parse() string {
 	flag.Parse()
+	prompt := flag.Arg(0)
+
+	return prompt
 }
