@@ -29,6 +29,7 @@ var (
 		"init", "", "Set prompt as initial question (0th).")
 )
 
+// func () 
 func Parse() {
 	flag.Parse()
 }

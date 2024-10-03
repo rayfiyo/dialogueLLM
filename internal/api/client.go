@@ -17,6 +17,7 @@ type Client struct {
 	HTTPClient *http.Client
 }
 
+// func (string) *Client
 func NewClient(baseURL string) *Client {
 	return &Client{
 		BaseURL:    baseURL,
@@ -24,11 +25,13 @@ func NewClient(baseURL string) *Client {
 	}
 }
 
+// (c *Client) func (*models.ChatRequest) (string, error)
 func (c *Client) Chat(req *models.ChatRequest) (string, error) {
-	return c.sendRequest("/api/chat", req, "chat")
+	return c.sendRequest("/api/chat", req)
 }
 
-func (c *Client) sendRequest(endpoint string, req interface{}, mode string) (string, error) {
+// (c *Client) func (string, interface{}) (string, error)
+func (c *Client) sendRequest(endpoint string, req interface{}) (string, error) {
 	data, err := json.Marshal(req)
 	if err != nil {
 		return "", fmt.Errorf("error marshaling request: %w", err)

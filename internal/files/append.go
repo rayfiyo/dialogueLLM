@@ -5,6 +5,7 @@ import (
 )
 
 // ファイルに文字列を追記する
+// func (string, string) error 
 func Append(fileName, text string) error {
 	// ファイルを開く（存在しない場合は新規作成）
 	file, err := Open(fileName)

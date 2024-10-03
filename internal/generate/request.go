@@ -4,7 +4,7 @@ import (
 	"github.com/rayfiyo/llms/dialogue/models"
 )
 
-// (input models.ChatRequest, newMessage models.Message) models.ChatRequest
+// func (models.ChatRequest, models.Message) models.ChatRequest
 func Request(input models.ChatRequest, newMessage models.Message) models.ChatRequest {
 	// 返り値の定義
 	output := models.ChatRequest{

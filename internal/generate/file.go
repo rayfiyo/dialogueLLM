@@ -4,7 +4,8 @@ import (
 	"time"
 )
 
-func FileName() string {
+// func () string
+func File() string {
 	// 現在時刻を取得
 	now := time.Now()
 

@@ -17,7 +17,7 @@ func main() {
 	flags.Parse()
 	prompt := flag.Arg(0)
 
-	fileName := generate.FileName()
+	fileName := generate.File()
 
 	// ログの Markdown に ヘッダー情報として書き込む
 	if err := files.Header(fileName, prompt); err != nil {
