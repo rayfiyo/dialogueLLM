@@ -6,6 +6,7 @@ import (
 	"log"
 
 	"github.com/rayfiyo/llms/dialogue/internal/api"
+	"github.com/rayfiyo/llms/dialogue/internal/constants"
 	"github.com/rayfiyo/llms/dialogue/internal/files"
 	"github.com/rayfiyo/llms/dialogue/internal/flags"
 	"github.com/rayfiyo/llms/dialogue/internal/format"
@@ -14,9 +15,11 @@ import (
 )
 
 func main() {
+	// フラグのパース
 	flags.Parse()
 	prompt := flag.Arg(0)
 
+	/// ファイル生成
 	fileName := generate.File()
 
 	// ログの Markdown に ヘッダー情報として書き込む
@@ -24,24 +27,13 @@ func main() {
 		log.Fatal("Error writing options in file header: %w", err)
 	}
 
+	// クライアント生成
 	client := api.NewClient("http://172.27.167.204:11434")
 
-	var messages []models.Message
-	var content string
-	var err error
+	var request models.ChatRequest
 
-	// ロールの初期化
-	initialRole := "user"
-	if *flags.CyclesLimit%2 == 0 {
-		initialRole = "assistant"
-	}
-	messages = append(messages, models.Message{
-		Role:    initialRole,
-		Content: initialPrompt,
-	})
-
+	// やり取り
 	for i := 1; i < *flags.CyclesLimit+1; i++ {
-
 		// 整形
 		if *flags.Init != "" {
 			i = 0
@@ -54,18 +46,15 @@ func main() {
 		fmt.Print("\n- - - - - - - - - - - -\n")
 		log.Printf("%3d:\n\n", i)
 
-		messages = append(messages, models.Message{
-			Role:    "user",
+		// リクエストの生成
+		message := models.Message{
+			Role:    constants.User,
 			Content: prompt,
-		})
-
-		request := &models.ChatRequest{
-			Model:    *flags.Model,
-			Messages: messages,
 		}
+		request = generate.Request(request, message)
 
 		// APIの通信（リクエスト送信とレスポンス取得）
-		content, err = client.Chat(request)
+		content, err := client.Chat(&request)
 		if err != nil {
 			log.Fatalf("Error in switch@%d: %v", i, err)
 		}

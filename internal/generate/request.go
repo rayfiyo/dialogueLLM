@@ -1,6 +1,7 @@
 package generate
 
 import (
+	"github.com/rayfiyo/llms/dialogue/internal/constants"
 	"github.com/rayfiyo/llms/dialogue/models"
 )
 
@@ -14,9 +15,9 @@ func Request(input models.ChatRequest, newMessage models.Message) models.ChatReq
 
 	// ロールの入れ替え
 	for i, msg := range input.Messages {
-		newRole := "user"
+		newRole := constants.User
 		if msg.Role == newRole {
-			newRole = "assistant"
+			newRole = constants.Assistant
 		}
 		output.Messages[i] = models.Message{
 			Role:    newRole,
