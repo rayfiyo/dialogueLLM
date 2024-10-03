@@ -5,10 +5,11 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/rayfiyo/llms/dialogue/cmd/api"
-	"github.com/rayfiyo/llms/dialogue/cmd/files"
-	"github.com/rayfiyo/llms/dialogue/cmd/flags"
-	"github.com/rayfiyo/llms/dialogue/cmd/generate"
+	"github.com/rayfiyo/llms/dialogue/internal/api"
+	"github.com/rayfiyo/llms/dialogue/internal/files"
+	"github.com/rayfiyo/llms/dialogue/internal/flags"
+	"github.com/rayfiyo/llms/dialogue/internal/format"
+	"github.com/rayfiyo/llms/dialogue/internal/generate"
 	"github.com/rayfiyo/llms/dialogue/models"
 )
 
@@ -29,15 +30,25 @@ func main() {
 	var content string
 	var err error
 
+	// ロールの初期化
+	initialRole := "user"
+	if *flags.CyclesLimit%2 == 0 {
+		initialRole = "assistant"
+	}
+	messages = append(messages, models.Message{
+		Role:    initialRole,
+		Content: initialPrompt,
+	})
+
 	for i := 1; i < *flags.CyclesLimit+1; i++ {
 
 		// 整形
 		if *flags.Init != "" {
 			i = 0
 			*flags.Init = ""
-			generate.Prompt(i, prompt)
+			format.Prompt(i, prompt)
 		} else {
-			generate.Prompt(i, prompt)
+			format.Prompt(i, prompt)
 		}
 
 		fmt.Print("\n- - - - - - - - - - - -\n")

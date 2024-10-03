@@ -3,7 +3,7 @@ package files
 import (
 	"fmt"
 
-	"github.com/rayfiyo/llms/dialogue/cmd/flags"
+	"github.com/rayfiyo/llms/dialogue/internal/flags"
 )
 
 func Header(fileName string, prompt string) error {

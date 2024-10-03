@@ -1,9 +1,9 @@
-package generate
+package format
 
 import (
 	"fmt"
 
-	"github.com/rayfiyo/llms/dialogue/cmd/flags"
+	"github.com/rayfiyo/llms/dialogue/internal/flags"
 )
 
 func Prompt(cycle int, prompt string) string {
