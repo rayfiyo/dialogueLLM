@@ -25,11 +25,9 @@ var (
 		"tail1", "", "Head of odd cycle prompt. Fixed statement.")
 	Tail2 = flag.String(
 		"tail2", "", "Head of even cycle prompt. Fixed statement.")
-	Init = flag.String(
-		"init", "", "Set prompt as initial question (0th).")
 )
 
-// func () 
+// func ()
 func Parse() {
 	flag.Parse()
 }

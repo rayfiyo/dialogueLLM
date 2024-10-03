@@ -6,7 +6,7 @@ import (
 	"github.com/rayfiyo/llms/dialogue/internal/flags"
 )
 
-// func (string, string) error 
+// func (string, string) error
 func Header(fileName string, prompt string) error {
 	return Append(fileName, "---"+
 		"\ntitle: "+
@@ -22,7 +22,6 @@ func Header(fileName string, prompt string) error {
 		"\nHead2: "+*flags.Head2+
 		"\n"+
 		"\nprompt: "+prompt+
-		"\nInit: "+*flags.Init+
 		"\n"+
 		"\nTail: "+*flags.Tail+
 		"\nTail1: "+*flags.Tail1+

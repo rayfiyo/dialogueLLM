@@ -35,13 +35,7 @@ func main() {
 	// やり取り
 	for i := 1; i < *flags.CyclesLimit+1; i++ {
 		// 整形
-		if *flags.Init != "" {
-			i = 0
-			*flags.Init = ""
-			format.Prompt(i, prompt)
-		} else {
-			format.Prompt(i, prompt)
-		}
+		format.Prompt(i, prompt)
 
 		fmt.Print("\n- - - - - - - - - - - -\n")
 		log.Printf("%3d:\n\n", i)
