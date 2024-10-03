@@ -33,7 +33,10 @@ func main() {
 	// やり取り
 	for i := 1; i < *flags.CyclesLimit+1; i++ {
 		// 整形
-		format.Prompt(i, prompt)
+		formattedPrompt, err := format.Prompt(i, prompt)
+		if err != nil {
+			log.Fatal(err)
+		}
 
 		fmt.Print("\n- - - - - - - - - - - -\n")
 		log.Printf("%3d:\n\n", i)
@@ -41,7 +44,7 @@ func main() {
 		// リクエストの生成
 		message := models.Message{
 			Role:    constants.User,
-			Content: prompt,
+			Content: formattedPrompt,
 		}
 		request = create.Request(request, message)
 
