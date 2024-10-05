@@ -32,16 +32,15 @@ func main() {
 	// やり取り
 	for i := 1; i < *flags.CyclesLimit+1; i++ {
 		// 整形
-		formattedPrompt, err := format.Prompt(i, prompt)
-		if err != nil {
+		if formattedPrompt, err := format.Prompt(i, prompt); err != nil {
 			log.Fatal(err)
+		} else {
+			// リクエストの生成
+			request = create.Request(request, formattedPrompt, i)
 		}
 
 		fmt.Print("\n- - - - - - - - - - - -\n")
 		log.Printf("%3d:\n\n", i)
-
-		// リクエストの生成
-		request = create.Request(request, formattedPrompt, i)
 
 		// APIの通信（リクエスト送信とレスポンス取得）
 		content, err := client.Chat(&request)

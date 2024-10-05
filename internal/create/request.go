@@ -9,10 +9,6 @@ import (
 // func (models.ChatRequest, string, int) models.ChatRequest
 func Request(input models.ChatRequest, formattedPrompt string, cycle int) models.ChatRequest {
 	// 返り値の定義
-	newMessage := models.Message{
-		Role:    constants.User,
-		Content: formattedPrompt,
-	}
 	output := models.ChatRequest{
 		Model:    *flags.Model,
 		Messages: make([]models.Message, len(input.Messages)+1),
@@ -43,7 +39,11 @@ func Request(input models.ChatRequest, formattedPrompt string, cycle int) models
 		}
 	}
 
-	// 追記
+	// 新しいメッセージの追記
+	newMessage := models.Message{
+		Role:    constants.User,
+		Content: formattedPrompt,
+	}
 	output.Messages[len(input.Messages)] = models.Message{
 		Role:    newMessage.Role,
 		Content: newMessage.Content,
