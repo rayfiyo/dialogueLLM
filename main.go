@@ -5,7 +5,6 @@ import (
 	"log"
 
 	"github.com/rayfiyo/dialogueLLM/internal/api"
-	"github.com/rayfiyo/dialogueLLM/internal/constants"
 	"github.com/rayfiyo/dialogueLLM/internal/create"
 	"github.com/rayfiyo/dialogueLLM/internal/files"
 	"github.com/rayfiyo/dialogueLLM/internal/flags"
@@ -42,11 +41,7 @@ func main() {
 		log.Printf("%3d:\n\n", i)
 
 		// リクエストの生成
-		message := models.Message{
-			Role:    constants.User,
-			Content: formattedPrompt,
-		}
-		request = create.Request(request, message)
+		request = create.Request(request, formattedPrompt, i)
 
 		// APIの通信（リクエスト送信とレスポンス取得）
 		content, err := client.Chat(&request)
